@@ -19,8 +19,8 @@ HEADERS += \
     prime_num.h \
     valueerror.h
 
-FORMS += \
-    mainwindow.ui
+#FORMS += \
+#    mainwindow.ui
 
 
 CONFIG += lrelease
