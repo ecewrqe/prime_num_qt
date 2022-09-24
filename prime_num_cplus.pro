@@ -15,6 +15,8 @@ SOURCES += \
     valueerror.cpp
 
 HEADERS += \
+    ProgessBarThread.h \
+    TableMakeThread.h \
     mainwindow.h \
     prime_num.h \
     valueerror.h

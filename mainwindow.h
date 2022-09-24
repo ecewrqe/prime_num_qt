@@ -24,13 +24,18 @@
 #include <QHeaderView>
 #include <Qt>
 #include<QtCore/QDebug>
+#include <QProgressBar>
 #include<list>
 #include <algorithm>
+#include<QMessageBox>
 
 
 #include <iterator>
 
 #include "prime_num.h"
+#include "ProgessBarThread.h"
+#include "TableMakeThread.h"
+
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
 QT_END_NAMESPACE
@@ -45,15 +50,25 @@ public:
     void make_table();
 
 public slots:
-    void toggle_prime();
     void toggle_prime(int);
     void judge_onclick();
     void toggle_happy(int);
     void make_data();
-
+    void proSendValue(long long prime_size, long long min_num, long long max_num);
+    void makeHeadItem(long long row, QString item);
+    void makeBodyItem(long long row, long long col, QString item);
+    void setRenderValue(long long renderValue);
+    void setPrimeValue(long long primeValue);
 
 signals:
     void clicked();
+    void getRenderTotalNum(int total);
+    void sendValueToMakeTable(long long, long long, bool, bool);
+
+public slots:
+    
+
+    void onProgress(int);
 
 private:
     Ui::MainWindow *ui;
@@ -80,7 +95,28 @@ private:
     QLabel *tableMsg;
     QLabel *tableTitle;
 
+    // プログレス
+    QHBoxLayout* renderLayout;
+    QProgressBar* renderProBar;
+    
+    QHBoxLayout* primeLayout;
+    QProgressBar* primeProBar;
+    QLabel* renderTotal;
+    QLabel* renderLabel;
+    QLabel* renderCount;
+    QLabel* primeTotal;
+    QLabel* primeLabel;
+    QLabel* primeCount;
+
+    int renderedCount;
+    ProgressBarThread probarT;
+    QMetaObject::Connection emit_value;
+
+    TableMakeThread *tableMakeThread;
+
     QTableWidget *table;
+    QTableWidgetItem* bodyItem;
+    QTableWidgetItem* headerItem;
 
     // 素数判定
     QLineEdit *judge_edit;

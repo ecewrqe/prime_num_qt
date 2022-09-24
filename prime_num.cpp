@@ -12,6 +12,7 @@
 #include<string>
 #include<set>
 #include<list>
+#include<QtCore/QDebug>
 #include "prime_num.h"
 using namespace std;
 /// <summary>
@@ -57,8 +58,8 @@ int numSquareSum(long long n) {
 
 
 list<long long> get_primenum_list(long long max_num, long long min_num, bool happy, bool prime) {
-	
-    list<long long> prime_list;
+	//qDebug() << "get_primenum_list start" << max_num << min_num << happy << prime;
+	list<long long> prime_list;
 	if (min_num < 7) {
 		min_num = 7;
 	}
@@ -70,14 +71,17 @@ list<long long> get_primenum_list(long long max_num, long long min_num, bool hap
 
 	if (prime) {
 		while (num <= max_num) {
-
+			//qDebug() << "get prime list" << num;
             long long remainder;
             long long is_prime = is_prime_func(num, remainder);
 			if (is_prime) {
 				if (happy && is_happy_func(num)) {
+					//qDebug() << "prime and happy" << num;
 					prime_list.push_back(num);
 				}
 				else if (!happy) {
+					//qDebug() << "prime" << num;
+					//qDebug() << num;
 					prime_list.push_back(num);
 				}
 			}
@@ -87,6 +91,7 @@ list<long long> get_primenum_list(long long max_num, long long min_num, bool hap
 	else {
 		while (num <= max_num) {
 			if (happy && is_happy_func(num)) {
+				//qDebug() << "happy" << num;
 				prime_list.push_back(num);
 			}
 			num += 1;
