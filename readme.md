@@ -24,6 +24,7 @@ prime_num.ico, prime_num.rc, prime_num.exe.manifest
 ビルド後独立環境を作るには下の命令
 windeployqt.exe prime_num.exe
 インストーラーを作るにはinno setup
+*ビルドする際の使ったビルドツールに対応するwindeployqt.exeを使いましょう*
 
 今度のアルゴリズムにより、素数表では八桁も数秒間
 素数判定機能は素数やハッピー数であるかを提示する
@@ -33,7 +34,8 @@ windeployqt.exe prime_num.exe
 い：レンダーしている同時にレンダーした数字が観察出来る
 う：プログレスバーでテーブルをどれほどレンダーしたか直観的に見せられる
 
-
+## 新機能2013/03/12 :
+あ：アラビア数字をローマ数字へ転換すること、最大限は10桁
 
 
 

@@ -28,6 +28,20 @@ int NumSmallError::returncode(){
     return _Errinfo;
 }
 
+NumLargeError::NumLargeError(const char *_Message, int res)
+    :_Errinfo(res), std::runtime_error(_Message)
+{
+
+}
+NumLargeError::NumLargeError(const std::string& _Message, int res)
+    :_Errinfo(res), std::runtime_error(_Message){
+
+}
+
+int NumLargeError::returncode(){
+    return _Errinfo;
+}
+
 PrimeCheckedError::PrimeCheckedError(const char *_Message, int res)
     :_Errinfo(res), std::runtime_error(_Message)
 {

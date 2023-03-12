@@ -28,6 +28,7 @@
 #include<list>
 #include <algorithm>
 #include<QMessageBox>
+#include<iostream>
 
 
 #include <iterator>
@@ -35,6 +36,7 @@
 #include "prime_num.h"
 #include "ProgessBarThread.h"
 #include "TableMakeThread.h"
+#include "NumTransfer.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -52,6 +54,7 @@ public:
 public slots:
     void toggle_prime(int);
     void judge_onclick();
+    void toRomanOnclick();
     void toggle_happy(int);
     void make_data();
     void proSendValue(long long prime_size, long long min_num, long long max_num);
@@ -123,5 +126,9 @@ private:
     QPushButton *judgeOkButton;
     QLabel *judgeMsg;
 
+    // ローマ数字へ転換
+    QLineEdit *arabicNumEdit;
+    QPushButton *toRomanButton;
+    QLabel *romanNumOutput;
 };
 #endif // MAINWINDOW_H

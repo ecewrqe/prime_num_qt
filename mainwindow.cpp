@@ -11,7 +11,6 @@
 
 
 
-
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -134,12 +133,25 @@ MainWindow::MainWindow(QWidget *parent)
     this->judgeMsg->setStyleSheet("color:black");
     this->layout->addWidget(this->judgeMsg);
 
+    // ローマン数字へ転換
+    this->label = new QLabel("アラビア数字を入力し：");
+    this->layout->addWidget(this->label);
+    this->arabicNumEdit = new QLineEdit();
+    this->layout->addWidget(this->arabicNumEdit);
+    this->toRomanButton = new QPushButton("確定");
+    connect(this->toRomanButton, SIGNAL(clicked()), this, SLOT(toRomanOnclick()));
+    this->layout->addWidget(this->toRomanButton);
+    this->romanNumOutput = new QLabel();
+    this->romanNumOutput->setStyleSheet("color:black");
+    this->layout->addWidget(this->romanNumOutput);
 
     this->widget->setLayout(this->layout);
     this->setCentralWidget(this->widget);
 
     tableMakeThread = new TableMakeThread();
     //tableMakeThread->moveToThread(tableMakeThread);
+
+
 
     // 作る前に準備
     QObject::connect(this, SIGNAL(sendValueToMakeTable(long long, long long, bool, bool)), tableMakeThread, SLOT(setValue(long long, long long, bool, bool)));
@@ -151,6 +163,8 @@ MainWindow::MainWindow(QWidget *parent)
 
     QObject::connect(tableMakeThread, SIGNAL(getRenderValue(long long)), this, SLOT(setRenderValue(long long)));
     QObject::connect(tableMakeThread, SIGNAL(getPrimeValue(long long)), this, SLOT(setPrimeValue(long long)));
+
+
 
 }
 
@@ -205,6 +219,34 @@ void MainWindow::judge_onclick(){
     }
 
 
+}
+
+void MainWindow::toRomanOnclick(){
+    bool ok;
+    long long num = (this->arabicNumEdit->text()).toLongLong(&ok);
+    // throw error
+    try{
+        if(!ok){
+            throw ValueError("数字を入力してください");
+        }
+        bool ok2;
+        string result = to_roman_transfer(num, &ok2);
+        cout << "ok?" << ok2 << endl;
+        if(!ok2){
+            throw NumLargeError("数字は十桁を超えた");
+        }
+        this->romanNumOutput->setText(QString::fromStdString(result));
+        this->romanNumOutput->setStyleSheet("color:black");
+    }
+    catch(NumLargeError ex){
+        this->romanNumOutput->setText("数字は十桁を超えた");
+        this->romanNumOutput->setStyleSheet("color:red");
+    }
+
+    catch(ValueError ex){
+        this->romanNumOutput->setText("数字を入力してください");
+        this->romanNumOutput->setStyleSheet("color:red");
+    }
 }
 
 void MainWindow::toggle_prime(int prime){

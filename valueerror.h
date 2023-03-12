@@ -33,6 +33,15 @@ private:
     int _Errinfo;
 };
 
+class NumLargeError : public std::runtime_error{
+public:
+    NumLargeError(const char *_Message, int res=1);
+    NumLargeError(const std::string& _Message, int res=1);
+    int returncode();
+private:
+    int _Errinfo;
+};
+
 class PrimeCheckedError : public std::runtime_error
 {
 public:

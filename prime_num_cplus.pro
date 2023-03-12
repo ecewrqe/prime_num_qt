@@ -12,14 +12,16 @@ SOURCES += \
     main.cpp \
     mainwindow.cpp \
     prime_num.cpp \
-    valueerror.cpp
+    valueerror.cpp \
+    NumTransfer.cpp
 
 HEADERS += \
     ProgessBarThread.h \
     TableMakeThread.h \
     mainwindow.h \
     prime_num.h \
-    valueerror.h
+    valueerror.h \
+    NumTransfer.h
 
 #FORMS += \
 #    mainwindow.ui
@@ -38,14 +40,13 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 DISTFILES += \
     ../prime_icon/prime.ico \
     prime_num.ico \
-    prime_num.rc \
     prime_num2.exe.MANIFEST \
     readme.md
-
+# prime_num.rc \
 # icon and admin
-win32{
-    RC_FILE = prime_num.rc
-}
+#win32{
+#    RC_FILE = prime_num.rc
+#}
 
 
 
