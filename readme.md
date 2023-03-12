@@ -10,7 +10,7 @@ language: C++/msvc2019
 framework: QT
 OS: windows10/mac
 author: euewrqe
-version: 1.2
+version: 1.3
 
 ## 機能
 あ：最大数と最小数という両端を定めてから出来る素数二次元表
